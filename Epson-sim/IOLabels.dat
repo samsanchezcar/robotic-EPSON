@@ -1,0 +1,39 @@
+ENVT0100,LM:2025/11/13 22:43:01:655,DS:0000000651,CS:12229,MA:08-97-98-DD-29-A5,EI:           
+sRCVersion="7.5.2"
+InputBitLabels {
+	nNumberOfLabels=1
+	Label1 {
+		nBit=9
+		sLabel="In_9"
+		sDescription=""
+	}
+}
+InputByteLabels {
+	nNumberOfLabels=0
+}
+InputWordLabels {
+	nNumberOfLabels=0
+}
+OutputBitLabels {
+	nNumberOfLabels=1
+	Label1 {
+		nBit=9
+		sLabel="Out_9"
+		sDescription="Out_9: Actuador Neumático (5/2)"
+	}
+}
+OutputByteLabels {
+	nNumberOfLabels=0
+}
+OutputWordLabels {
+	nNumberOfLabels=0
+}
+MemoryBitLabels {
+	nNumberOfLabels=0
+}
+MemoryByteLabels {
+	nNumberOfLabels=0
+}
+MemoryWordLabels {
+	nNumberOfLabels=0
+}

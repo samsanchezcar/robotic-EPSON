@@ -1,0 +1,176 @@
+' Declarar un arreglo de 30 enteros
+Global Integer valores(30)
+Global Integer valores2(30)
+Global Integer i
+
+' ----------------------------------------
+' Lógica negada de la pinza en Out_9
+' ----------------------------------------
+Function Grip_On       ' activar pinza (lógica NEGATIVA: activo = nivel bajo)
+    Off Out_9
+Fend
+
+Function Grip_Off      ' desactivar pinza (lógica NEGATIVA: inactivo = nivel alto)
+    On Out_9
+Fend
+
+' -------------------------
+Function main
+    Motor On
+    Power High
+    Accel 100, 100 '% 
+    Speed 100 '% 
+    ' Aseguramos estado inactivo de la pinza
+    Grip_Off()
+    Home
+
+    Call Recorridos
+
+    Do
+        Call Paletizado_doble
+    Loop
+Fend
+
+' -------------------------
+Function Paletizado_doble
+    Pallet 1, Origen, PuntoX, PuntoY, 6, 5
+
+    For i = 0 To 28
+        ' ---- Objeto 1 ----
+        Print "Posicion recoger objeto 1:", valores(i)
+        Jump Pallet(1, valores(i))
+        Move Here +Z(-7.5)
+        
+        Wait 1
+
+        Grip_On()
+
+        Print "Posicion dejar objeto 1:", valores(i + 1)
+        Jump Pallet(1, valores(i + 1))
+        Wait 1
+
+        Grip_Off()
+
+        ' ---- Objeto 2 ----
+        Print "Posicion recoger objeto 2:", valores2(i)
+        Jump Pallet(1, valores2(i))
+        Move Here +Z(-7.5)
+        Wait 1
+
+        Grip_On()
+
+        Print "Posicion dejar objeto 2:", valores2(i + 1)
+        Jump Pallet(1, valores2(i + 1))
+        Wait 1
+
+        Grip_Off()
+    Next
+
+    ' ---------- Acciones al finalizar toda la secuencia ----------
+    ' Retornar objeto 1 a la posición inicial
+    Print "Posicion recoger objeto 1:", valores(i)
+    Jump Pallet(1, valores(29))
+    Move Here +Z(-7.5)
+    
+    Wait 1
+
+    Grip_On()
+
+    Print "Posicion dejar objeto 1:", valores(i + 1)
+    Jump Pallet(1, valores(0))
+    Wait 1
+
+    Grip_Off()
+
+    ' ---- Objeto 2 ----
+    Print "Posicion recoger objeto 2:", valores2(i)
+    Jump Pallet(1, valores2(29))
+    Move Here +Z(-7.5)
+    Wait 1
+
+    Grip_On()
+
+    Print "Posicion dejar objeto 2:", valores2(i + 1)
+    Jump Pallet(1, valores2(0))
+    Wait 1
+
+    Grip_Off()
+    
+    Home
+    Wait 5
+Fend
+
+' -------------------------
+Function SubirZ
+    ' Reemplaza por el comando real de tu robot
+    ' Ejemplo:
+    ' MoveRel Z, 50
+Fend
+
+' -------------------------
+Function Recorridos
+    ' Secuencia para H1
+    valores(0) = 1
+    valores(1) = 9
+    valores(2) = 5
+    valores(3) = 18
+    valores(4) = 29
+    valores(5) = 21
+    valores(6) = 25
+    valores(7) = 14
+    valores(8) = 3
+    valores(9) = 7
+    valores(10) = 20
+    valores(11) = 28
+    valores(12) = 24
+    valores(13) = 11
+    valores(14) = 22
+    valores(15) = 30
+    valores(16) = 17
+    valores(17) = 6
+    valores(18) = 10
+    valores(19) = 2
+    valores(20) = 13
+    valores(21) = 26
+    valores(22) = 15
+    valores(23) = 4
+    valores(24) = 12
+    valores(25) = 23
+    valores(26) = 27
+    valores(27) = 19
+    valores(28) = 8
+    valores(29) = 16
+
+    ' Secuencia para H2
+    valores2(0) = 30
+    valores2(1) = 17
+    valores2(2) = 6
+    valores2(3) = 10
+    valores2(4) = 2
+    valores2(5) = 13
+    valores2(6) = 21
+    valores2(7) = 25
+    valores2(8) = 14
+    valores2(9) = 1
+    valores2(10) = 9
+    valores2(11) = 5
+    valores2(12) = 18
+    valores2(13) = 29
+    valores2(14) = 16
+    valores2(15) = 3
+    valores2(16) = 7
+    valores2(17) = 20
+    valores2(18) = 28
+    valores2(19) = 24
+    valores2(20) = 11
+    valores2(21) = 22
+    valores2(22) = 26
+    valores2(23) = 15
+    valores2(24) = 4
+    valores2(25) = 12
+    valores2(26) = 23
+    valores2(27) = 27
+    valores2(28) = 19
+    valores2(29) = 8
+Fend
+

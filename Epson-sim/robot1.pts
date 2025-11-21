@@ -1,0 +1,85 @@
+ENVT0100,LM:2025/11/20 16:52:38:278,DS:0000001066,CS:01878,MA:08-97-98-DD-29-A5,EI:           
+sVersion="2.0.0"
+bDisplayR=False
+bDisplayS=False
+bDisplayT=False
+nNumberOfJoints=4
+nNumberOfPoints=3
+Point1 {
+	nNumber=0
+	sLabel="Origen"
+	sDescription=""
+	nUndefined=448
+	rX=-115
+	rY=150
+	rZ=-86.5
+	rU=50
+	rV=0
+	rW=0
+	rR=0
+	rS=0
+	rT=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ1Flag=0
+	nJ2Flag=0
+	nJ4Flag=0
+	nJ6Flag=0
+	rJ1Angle=0
+	rJ4Angle=0
+	bSimVisible=False
+}
+Point2 {
+	nNumber=1
+	sLabel="PuntoX"
+	sDescription=""
+	nUndefined=448
+	rX=115
+	rY=150
+	rZ=-86.5
+	rU=50
+	rV=0
+	rW=0
+	rR=0
+	rS=0
+	rT=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ1Flag=0
+	nJ2Flag=0
+	nJ4Flag=0
+	nJ6Flag=0
+	rJ1Angle=0
+	rJ4Angle=0
+	bSimVisible=False
+}
+Point3 {
+	nNumber=2
+	sLabel="PuntoY"
+	sDescription=""
+	nUndefined=448
+	rX=-115
+	rY=245
+	rZ=-86.5
+	rU=50
+	rV=0
+	rW=0
+	rR=0
+	rS=0
+	rT=0
+	nLocal=0
+	nHand=1
+	nElbow=1
+	nWrist=1
+	nJ1Flag=0
+	nJ2Flag=0
+	nJ4Flag=0
+	nJ6Flag=0
+	rJ1Angle=0
+	rJ4Angle=0
+	bSimVisible=False
+}
