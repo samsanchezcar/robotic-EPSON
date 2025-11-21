@@ -76,16 +76,14 @@ El laboratorio integra:
 
 ## 🎯 Objetivos
 
-Tomados y adaptados del enunciado oficial del laboratorio:
-
 - Comprender las características técnicas del **EPSON T3-401S** y compararlas con el **Motoman MH6** y el **ABB IRB 140**.  
 - Identificar y describir la configuración inicial y la definición de la posición **Home** del EPSON T3-401S.  
 - Realizar movimientos manuales del T3-401S en modos articular y cartesiano, incluyendo traslaciones y rotaciones en los ejes X, Y, Z.  
 - Cambiar y controlar los niveles de velocidad en movimiento manual.  
 - Describir las principales aplicaciones de **EPSON RC+ 7.0** y su comunicación con el manipulador.  
-- Comparar EPSON RC+ 7.0 con **RoboDK** y **RobotStudio**.  
-- Diseñar un **gripper neumático por vacío** para manipulación de huevos.  
-- Diseñar y ejecutar una trayectoria en EPSON RC+ 7.0, y replicarla físicamente en el T3-401S.
+- Comparar EPSON RC+ 7.0 con **RoboDK** y **RobotStudio** en términos de capacidades de simulación, compatibilidad y curva de aprendizaje.  
+- Diseñar un **gripper neumático por vacío** para manipulación de huevos y validar su desempeño en simulación y en el robot real.  
+- Diseñar y ejecutar una trayectoria de paletizado doble en EPSON RC+ 7.0, y replicarla físicamente en el T3-401S.
 
 ---
 
@@ -95,33 +93,36 @@ Tomados y adaptados del enunciado oficial del laboratorio:
 
 A partir de la documentación de los fabricantes y el enunciado del laboratorio:
 
-| Característica                          | **EPSON T3-401S (SCARA)** | **Yaskawa Motoman MH6** | **ABB IRB 140** |
-|-----------------------------------------|----------------------------|--------------------------|------------------|
-| **Tipo de robot**                       | SCARA 4 ejes (R-R-P-R)     | Articulado 6 ejes        | Articulado 6 ejes |
-| **Carga máxima (payload)**             | 3 kg máx.                  | 6 kg                     | 6 kg             |
-| **Alcance / Longitud de brazo**        | 400 mm (225 + 175 mm)      | ≈ 1422 mm                | ≈ 810 mm         |
-| **Grados de libertad**                 | 4                          | 6                        | 6                |
-| **Repetibilidad típica**               | ±0,02 mm / ±0,02°          | ±0,08 mm                 | ±0,03 mm         |
-| **Vel. máx. de ejes principales**      | J1–J2: 3700 mm/s, J4: 2600 °/s | Hasta 610 °/s según eje | 200–450 °/s según eje |
-| **Peso del robot**                     | ~16 kg                     | ~130 kg                  | ~98 kg           |
-| **Controlador típico**                 | Control integrado + EPSON RC+ 7.0 (PC) | DX100 (Yaskawa) | IRC5 (ABB)      |
+| Característica                          | **EPSON T3-401S (SCARA)**              | **Yaskawa Motoman MH6**    | **ABB IRB 140**           |
+|-----------------------------------------|-----------------------------------------|----------------------------|---------------------------|
+| **Tipo de robot**                       | SCARA 4 ejes (R-R-P-R)                  | Articulado 6 ejes          | Articulado 6 ejes         |
+| **Carga máxima (payload)**             | 3 kg máx.                               | 6 kg                       | 6 kg                      |
+| **Alcance / Longitud de brazo**        | 400 mm (225 + 175 mm)                   | ≈ 1422 mm                  | ≈ 810 mm                  |
+| **Grados de libertad**                 | 4                                       | 6                          | 6                         |
+| **Repetibilidad típica**               | ±0,02 mm / ±0,02°                       | ±0,08 mm                   | ±0,03 mm                  |
+| **Vel. máx. de ejes principales**      | J1–J2: hasta 3700 mm/s (traslación), J4: hasta 2600 °/s | Hasta 610 °/s según eje | 200–450 °/s según eje    |
+| **Peso del robot**                     | ~16 kg                                  | ~130 kg                    | ~98 kg                    |
+| **Controlador típico**                 | Control integrado + EPSON RC+ 7.0 (PC)  | DX100 (Yaskawa)            | IRC5 (ABB)                |
 | **Aplicaciones típicas**               | Pick & place, empaque, electrónica ligera, ensamble | Manipulación, soldadura ligera, dispensado | Soldadura por arco, pick & place, empaquetado |
-| **Ventajas clave**                     | Bajo costo, compacto, fácil integración con EPSON RC+ | Gran alcance con baja carga propia | Alta precisión, buena rigidez |
 | **Recomendado para**                   | Celdas compactas, manipulación ligera y rápida | Volúmenes de trabajo amplios | Aplicaciones de alta precisión en espacio reducido |
 
-Los datos del T3-401S (alcance total 400 mm, carga máxima 3 kg y repetibilidad ±0,02 mm) se tomaron de las especificaciones oficiales del robot.
+### Análisis comparativo
+
+- **EPSON T3-401S** prioriza precisión y velocidad en trayectorias cortas, con un volumen de trabajo reducido pero muy adecuado para tareas de manipulación ligera y celdas compactas.  
+- **Motoman MH6** ofrece un alcance significativamente mayor, ideal para aplicaciones que requieren cubrir grandes áreas (por ejemplo, manipulación alrededor de un fixture grande o diferentes estaciones de trabajo).  
+- **ABB IRB 140** se ubica entre ambos: menor que el MH6 en alcance, pero con muy buena precisión y rigidez, siendo adecuado para aplicaciones de alta repetibilidad en espacios confinados.
 
 ---
 
 ## 🏠 Configuraciones Home EPSON T3-401S
 
-En el entorno EPSON RC+ 7.0, la posición **Home** del T3-401S se configura como una combinación definida de los cuatro ejes, que sirve como referencia segura para inicio y retorno de programas. Los manuales y el material de capacitación enfatizan:
+En el entorno EPSON RC+ 7.0, la posición **Home** del T3-401S se configura como una combinación definida de los cuatro ejes, que sirve como referencia segura para:
 
-- La necesidad de **definir correctamente Home** después de instalación o mantenimiento.  
-- El uso del menú **HOME** en EPSON RC+ 7.0 para registrar y modificar las posiciones de referencia.  
-- La relación entre las marcas físicas de calibración en el robot (puntos de referencia en las articulaciones) y la definición lógica en el software.
+- Inicio y finalización de programas.  
+- Comprobación rápida de funcionamiento del robot.  
+- Punto seguro antes de energizar la herramienta o acercarse a la zona de trabajo.
 
-En la práctica, se usó una posición Home:
+En esta práctica se empleó una posición Home:
 
 - Con el brazo extendido en dirección positiva del eje X de la base.  
 - Altura suficiente para despejar la cubeta de huevos y el gripper.  
@@ -138,6 +139,11 @@ Esta posición se utiliza como:
 
 La operación manual del T3-401S se realiza desde el **Robot Manager** y las herramientas de **JOG & TEACH** en EPSON RC+ 7.0.
 
+<div align="center">
+  <img src="./sources/epson-rc-interface.png" alt="Interfaz EPSON RC+ 7.0" width="700" />
+  <p><em>Interfaz de EPSON RC+ 7.0 utilizada para Jog & Teach y ejecución del programa.</em></p>
+</div>
+
 ### 1. Preparación del sistema
 
 1. Verificar área de trabajo libre (cubeta, mesa, mangueras neumáticas).  
@@ -153,7 +159,12 @@ EPSON RC+ soporta diferentes modos de Jogging:
 
 - Permite mover cada articulación (J1–J4) de forma independiente.  
 - Se selecciona el modo **Joint** en la ventana de JOG & TEACH.  
-- Las teclas de movimiento asocian pasos incrementales sobre cada eje, con señales visuales de los valores de ángulo y recorrido actuales.
+- Las teclas de movimiento asocian pasos incrementales sobre cada eje, con retroalimentación visual de los valores de ángulo y recorrido actuales.
+
+Este modo es útil para:
+
+- Verificar el sentido de giro de cada eje.  
+- Llevar el robot a una posición aproximada antes de un ajuste fino cartesiano.  
 
 #### 🔹 Modo cartesiano (*Linear / Cartesian Jog*)
 
@@ -161,23 +172,26 @@ EPSON RC+ soporta diferentes modos de Jogging:
 - Se selecciona el sistema de coordenadas deseado:
   - **Base** (WORLD), relativo a la base del robot.  
   - **Tool** (TCP), relativo a la herramienta.  
-- El operador puede alternar entre **Go / Move / Jump** en Robot Manager para probar movimientos puntuales, lineales o con elevación automática.
+
+El operador puede alternar entre:
+
+- **Go**: movimiento rápido a un punto predefinido.  
+- **Move**: movimiento lineal hacia una nueva posición.  
+- **Jump**: movimiento que incluye elevación automática en Z para evitar colisiones.
 
 ### 3. Registro de puntos
 
 - Con el robot en el punto deseado, se registra la posición en la lista de puntos (`Teach Point`), asociada al archivo `robot1.pts`.  
-- Estos puntos se usan posteriormente como referencias para el **pallet** definido en `Main.prg`.
+- Estos puntos se usan posteriormente como referencias para el **pallet** definido en `Main.prg` (por ejemplo, `Origen`, `PuntoX`, `PuntoY` y posibles puntos de aproximación).
 
 ---
 
 ## 🚦 Explicación niveles de velocidad para movimientos manuales
 
-Los parámetros de **Speed** y **Accel** son programables entre 1 y 100 % para movimientos punto a punto (PTP).
-
-En Jog & Teach, EPSON RC+ 7.0 expone estos parámetros como:
+Los parámetros de **Speed** y **Accel** son programables entre 1 y 100 % para movimientos punto a punto (PTP). En Jog & Teach, EPSON RC+ 7.0 expone estos parámetros como:
 
 - **Jog Speed** (porcentaje de la velocidad máxima de PTP).  
-- Parámetros de aceleración asociados (**Accel**).  
+- Parámetros de aceleración asociados (**Accel**).
 
 ### Cambio de nivel de velocidad
 
@@ -189,7 +203,7 @@ En Jog & Teach, EPSON RC+ 7.0 expone estos parámetros como:
 En la práctica:
 
 - Para aproximaciones finas sobre los huevos se usaron velocidades bajas (≈10–20 %).  
-- Para los desplazamientos entre casillas de la cubeta se emplearon valores medios (≈40–60 %).  
+- Para los desplazamientos entre casillas de la cubeta se emplearon valores medios (≈40–60 %), buscando un equilibrio entre tiempo de ciclo y seguridad.
 
 ---
 
@@ -224,23 +238,39 @@ En resumen, **EPSON RC+ 7.0** genera y envía instrucciones en **SPEL+** al cont
 | Aspecto                 | **EPSON RC+ 7.0**                          | **RoboDK**                                   | **RobotStudio**                                      |
 |-------------------------|--------------------------------------------|----------------------------------------------|------------------------------------------------------|
 | **Marca objetivo**      | Solo robots EPSON                          | Multi-marca (incluye ABB, Yaskawa, etc.)     | Solo robots ABB                                      |
-| **Lenguaje principal**  | SPEL+                                      | API (Python, etc.) + generadores de código   | RAPID (nativo ABB)                                   |
+| **Lenguaje principal**  | SPEL+                                      | API (Python, C#, etc.) + generadores de código | RAPID (nativo ABB)                                 |
 | **Simulación**          | Simulador integrado, centrado en EPSON    | Simulación 3D genérica multi-robot           | Simulación con Virtual Controller muy precisa        |
 | **Post-procesamiento**  | Nativo EPSON                               | Post-procesadores para muchos fabricantes    | Nativo ABB                                           |
 | **Curva de aprendizaje**| Baja–media para tareas típicas SCARA      | Media                                         | Más empinada, pero muy potente                      |
 | **Aplicaciones típicas**| Celdas compactas, pick & place, T-series   | Entornos heterogéneos con múltiples robots   | Programación avanzada de celdas ABB                 |
+| **Ventaja principal**   | Integración directa con controladores EPSON | Flexibilidad multi-marca y API rica         | Fidelidad casi 1:1 con sistemas ABB reales          |
 
-**Interpretación personal:**
+**Comentario comparativo:**
 
-- **EPSON RC+ 7.0** es la herramienta ideal cuando se trabaja exclusivamente con robots EPSON: sencilla para tareas de paletizado, pick & place y manipulación ligera.  
-- **RoboDK** es la navaja suiza multi-marca: excelente para prototipado rápido y entornos con varios fabricantes.  
-- **RobotStudio** es el estándar de oro para celdas ABB donde se requiere máxima fidelidad entre simulación y realidad, gracias al controlador virtual y a sus herramientas de integración.
+- **EPSON RC+ 7.0** es ideal cuando el sistema está completamente basado en robots EPSON, ya que simplifica la puesta en marcha y aprovecha una integración muy directa con el hardware.  
+- **RoboDK** se comporta como un “pegamento” entre múltiples marcas, perfecto para laboratorios de enseñanza o plantas con robots heterogéneos.  
+- **RobotStudio** es la referencia cuando se requiere máxima fidelidad entre simulación y realidad en celdas ABB, permitiendo depurar programas RAPID casi como si se estuviera en planta.
 
 ---
 
 ## 🧲 Diseño del gripper neumático por vacío
 
 La tarea requiere diseñar un gripper neumático capaz de levantar huevos de forma segura utilizando las entradas y salidas digitales del T3-401S.
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="./sources/acople.png" alt="Acople del gripper" width="320" /><br/>
+        <em>Acople mecánico entre el eje 4 del T3-401S y el soporte de la ventosa.</em>
+      </td>
+      <td align="center">
+        <img src="./sources/montaje-huevos-caja-tool.jpeg" alt="Montaje de la caja de huevos" width="320" /><br/>
+        <em>Montaje del gripper de vacío sobre la cubeta de huevos en el área de trabajo.</em>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ### Elementos clave
 
@@ -263,13 +293,21 @@ Function Grip_Off      ' desactivar pinza (lógica NEGATIVA: inactivo = nivel al
 Fend
 ```
 
-De esta forma, el estado seguro por defecto es **pinza desactivada** (`Grip_Off`), y solo cuando se requiere vacío se fuerza `Off Out_9` para energizar la válvula (según el cableado elegido).
+De esta forma:
+
+- El estado seguro por defecto es **pinza desactivada** (`Grip_Off`).  
+- Solo cuando se requiere vacío se fuerza `Off Out_9` para energizar la válvula (según el cableado elegido).  
 
 ---
 
 ## 🔧 Desarrollo de la práctica: recorrido doble tipo “caballo”
 
 La práctica implementa un **paletizado doble** de huevos en una cubeta de **6×5 (30 casillas)**, con dos huevos H1 y H2 que se desplazan siguiendo recorridos tipo **caballo de ajedrez** (movimientos en L).
+
+<div align="center">
+  <img src="./sources/eggs-positions.png" alt="Posiciones de la cubeta de huevos" width="550" />
+  <p><em>Numeración de posiciones (1–30) sobre la cubeta 6×5 utilizada para el paletizado.</em></p>
+</div>
 
 ### 1. Generación de recorridos (position-generation.py)
 
@@ -287,7 +325,7 @@ El algoritmo:
 - Evita que ambos huevos ocupen la misma casilla simultáneamente (`other_pos`).  
 - Cuando ambos alcanzan 30 casillas visitadas se considera solución completa.
 
-Al final, el script imprime las tablas de pasos para cada huevo y se convierten a secuencias de índices (1..30) que se transfieren a los arreglos `valores()` y `valores2()` utilizados en SPEL+.
+Finalmente, las tablas de pasos para cada huevo se convierten a secuencias de índices (1..30) que se transfieren manualmente a los arreglos `valores()` y `valores2()` utilizados en SPEL+.
 
 ### 2. Programa principal en SPEL+ (Main.prg)
 
@@ -359,31 +397,50 @@ Con esto se crea un recorrido **cíclico**: tras un ciclo completo, ambos huevos
 
 ---
 
-## 📈 Diagrama de flujo
+## 📈 Diagrama de flujo (Mermaid)
 
 ```mermaid
----
-title: EPSON T3-401S • Paletizado doble de huevos
----
 flowchart TD
-    START(["START"])
-    PROT["Verificación de seguridad y comunicación EPSON RC+ 7.0"]
-    INIT["Motor On, Power High, Home"]
-    LOAD["Cargar secuencias con Recorridos()"]
-    PALLET["Configurar pallet 6x5 (Pallet 1, Origen, PuntoX, PuntoY)"]
-    LOOP["For i = 0 To 28"]
-    H1PICK["H1: Jump Pallet(1, valores(i)) → Pick"]
-    H1PLACE["H1: Jump Pallet(1, valores(i+1)) → Place"]
-    H2PICK["H2: Jump Pallet(1, valores2(i)) → Pick"]
-    H2PLACE["H2: Jump Pallet(1, valores2(i+1)) → Place"]
-    CLOSE["Cerrar ciclo: mover H1 y H2 de casilla 30 a casilla 1"]
-    HOME["Retornar a Home y esperar 5 s"]
-    REPEAT["Repetir ciclo (Do...Loop)"]
-    END(["END"])
+    %% --- Inicialización del sistema ---
+    subgraph INIT["Inicialización del sistema"]
+        A0[START]
+        A1[Verificar seguridad del área de trabajo]
+        A2[Encender controlador T3-401S y PC]
+        A3[Conectar EPSON RC+ 7.0 con el controlador]
+        A4[Motor On · Power High]
+        A5[Ir a Home]
+        A6[Cargar secuencias con Recorridos()]
+    end
 
-    START --> PROT --> INIT --> LOAD --> PALLET --> LOOP
-    LOOP --> H1PICK --> H1PLACE --> H2PICK --> H2PLACE --> LOOP
-    LOOP --> CLOSE --> HOME --> REPEAT --> PALLET
+    %% --- Bucle principal de paletizado ---
+    subgraph CYCLE["Ciclo Paletizado_doble (Do...Loop)"]
+        B0[Configurar Pallet 1 (Origen, PuntoX, PuntoY, 6x5)]
+        B1[For i = 0 To 28]
+
+        subgraph H1["Huevo 1 (H1)"]
+            B2[Ir a casilla valores(i)]
+            B3[Bajar Z · Grip_On()]
+            B4[Ir a casilla valores(i+1)]
+            B5[Grip_Off()]
+        end
+
+        subgraph H2["Huevo 2 (H2)"]
+            B6[Ir a casilla valores2(i)]
+            B7[Bajar Z · Grip_On()]
+            B8[Ir a casilla valores2(i+1)]
+            B9[Grip_Off()]
+        end
+
+        B10[Next i]
+        B11[Cerrar ciclo:\nH1: 30 → 1 · H2: 30 → 1]
+        B12[Ir a Home]
+        B13[Wait 5 s]
+    end
+
+    A0 --> A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> B0
+    B0 --> B1
+    B1 --> B2 --> B3 --> B4 --> B5 --> B6 --> B7 --> B8 --> B9 --> B10
+    B10 --> B11 --> B12 --> B13 --> B0
 ```
 
 ---
@@ -428,19 +485,19 @@ Resultados:
 
 ## 🎓 Conclusiones
 
-1. **Comparación técnica:** El EPSON T3-401S, a pesar de su menor alcance y carga respecto al MH6 y al IRB 140, ofrece una repetibilidad muy alta (±0,02 mm) y un diseño compacto ideal para tareas de pick & place de alta velocidad en espacios reducidos.  
+1. **Comparación técnica:** El EPSON T3-401S, a pesar de su menor alcance y carga respecto al MH6 y al IRB 140, ofrece una repetibilidad muy alta (≈±0,02 mm) y un diseño compacto ideal para tareas de pick & place de alta velocidad en espacios reducidos.  
 
-2. **Configuración Home:** La correcta definición de la posición Home en EPSON RC+ 7.0 es fundamental para garantizar ciclos seguros y repetibles, y se apoya en las marcas de calibración físicas del robot.  
+2. **Configuración Home:** La correcta definición de la posición Home en EPSON RC+ 7.0 es fundamental para garantizar ciclos seguros y repetibles, y se apoya en las marcas de calibración físicas del robot y en la coherencia entre simulación y realidad.  
 
 3. **Movimientos manuales y velocidad:** Los modos de Jog (joint y cartesiano) y el ajuste de velocidad porcentual permiten una operación manual intuitiva: lento para aproximaciones delicadas y rápido para traslados largos, manteniendo siempre la seguridad del operador y de la pieza.  
 
-4. **EPSON RC+ 7.0 como herramienta:** El entorno combina de forma integrada programación, simulación y gestión de I/O, simplificando enormemente el flujo de trabajo desde la idea hasta la ejecución en el T3-401S, especialmente para aplicaciones de paletizado.  
+4. **EPSON RC+ 7.0 como herramienta:** El entorno combina de forma integrada programación, simulación y gestión de I/O, simplificando enormemente el flujo de trabajo desde la idea hasta la ejecución en el T3-401S, especialmente para aplicaciones de paletizado y pick & place.  
 
 5. **Comparación de software:** RobotStudio sigue siendo la referencia para celdas ABB complejas, mientras que RoboDK ofrece versatilidad multi-marca. EPSON RC+ 7.0, por su parte, destaca por su sencillez y enfoque práctico cuando el sistema está centrado exclusivamente en robots EPSON.  
 
-6. **Algoritmo de caballos:** El uso combinado de Python para la generación de recorridos tipo caballo y SPEL+ para la implementación en el robot demuestra la importancia de integrar herramientas de alto nivel con los lenguajes específicos de los controladores industriales.
+6. **Algoritmo de caballos:** El uso combinado de Python para la generación de recorridos tipo caballo y SPEL+ para la implementación en el robot demuestra la importancia de integrar herramientas de alto nivel con los lenguajes específicos de los controladores industriales.  
 
-7. **Diseño del gripper:** La implementación de un gripper neumático por vacío, apoyado en las I/O estándar y de mano del T3, permitió manipular objetos frágiles (huevos) de forma segura, validando el diseño mecánico y la lógica de control invertida de la salida `Out_9`.  
+7. **Diseño del gripper:** La implementación de un gripper neumático por vacío, apoyado en las I/O estándar y de mano del T3, permitió manipular objetos frágiles (huevos) de forma segura, validando el diseño mecánico (acople) y la lógica de control invertida de la salida `Out_9`.  
 
 ---
 
