@@ -452,9 +452,9 @@ flowchart TD
 <div align="center">
 
 <!-- TODO: reemplazar VIDEO_ID_SIM por el ID real de YouTube -->
-[![Simulación EPSON RC+](https://img.youtube.com/vi/VIDEO_ID_SIM/0.jpg)](https://youtu.be/VIDEO_ID_SIM)
+[![Simulación EPSON RC+](https://img.youtube.com/vi/sepwaIrt2qI/0.jpg)](https://youtu.be/sepwaIrt2qI)
 
-**(Enlace pendiente)** — Simulación del paletizado doble de huevos en EPSON RC+ 7.0.
+**([https://youtu.be/sepwaIrt2qI](https://youtu.be/sepwaIrt2qI))** — Simulación del paletizado doble de huevos en EPSON RC+ 7.0.
 
 </div>
 
