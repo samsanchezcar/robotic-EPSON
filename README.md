@@ -409,30 +409,30 @@ flowchart TD
         A3[Conectar EPSON RC+ 7.0 con el controlador]
         A4[Motor On · Power High]
         A5[Ir a Home]
-        A6[Cargar secuencias con Recorridos()]
+        A6[Cargar secuencias con Recorridos]
     end
 
     %% --- Bucle principal de paletizado ---
     subgraph CYCLE["Ciclo Paletizado_doble (Do...Loop)"]
-        B0[Configurar Pallet 1 (Origen, PuntoX, PuntoY, 6x5)]
+        B0[Configurar Pallet 1 -Origen, PuntoX, PuntoY, 6x5-]
         B1[For i = 0 To 28]
 
-        subgraph H1["Huevo 1 (H1)"]
-            B2[Ir a casilla valores(i)]
-            B3[Bajar Z · Grip_On()]
-            B4[Ir a casilla valores(i+1)]
-            B5[Grip_Off()]
+        subgraph H1["Huevo 1 -H1-"]
+            B2[Ir a casilla valores-i-]
+            B3[Bajar Z · Grip_On]
+            B4[Ir a casilla valores-i+1-]
+            B5[Grip_Off]
         end
 
-        subgraph H2["Huevo 2 (H2)"]
-            B6[Ir a casilla valores2(i)]
-            B7[Bajar Z · Grip_On()]
-            B8[Ir a casilla valores2(i+1)]
-            B9[Grip_Off()]
+        subgraph H2["Huevo 2 -H2-"]
+            B6[Ir a casilla valores2-i-]
+            B7[Bajar Z · Grip_On]
+            B8[Ir a casilla valores2-i+1-]
+            B9[Grip_Off]
         end
 
         B10[Next i]
-        B11[Cerrar ciclo:\nH1: 30 → 1 · H2: 30 → 1]
+        B11[Cerrar ciclo: ·H1: 30 → 1       · H2: 30 → 1]
         B12[Ir a Home]
         B13[Wait 5 s]
     end
