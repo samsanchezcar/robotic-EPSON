@@ -469,9 +469,9 @@ Características observadas:
 <div align="center">
 
 <!-- TODO: reemplazar VIDEO_ID_REAL por el ID real de YouTube -->
-[![Implementación física T3-401S](https://img.youtube.com/vi/VIDEO_ID_REAL/0.jpg)](https://youtu.be/VIDEO_ID_REAL)
+[![Implementación física T3-401S](https://img.youtube.com/vi/di-OgVYaqIo/0.jpg)](https://youtu.be/di-OgVYaqIo)
 
-**(Enlace pendiente)** — Ejecución real del paletizado con huevos y gripper neumático.
+**([https://youtu.be/di-OgVYaqIo](https://youtu.be/di-OgVYaqIo))** — Ejecución real del paletizado con huevos y gripper neumático.
 
 </div>
 
